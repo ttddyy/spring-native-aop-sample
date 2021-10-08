@@ -1,0 +1,10 @@
+[
+  {
+    "name": "com.example.demonativeaop.HelloService",
+    "allDeclaredMethods": true
+  },
+  {
+    "name": "com.example.demonativeaop.MyAspect",
+    "allDeclaredMethods": true
+  }
+]
