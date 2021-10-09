@@ -4,6 +4,14 @@
     "allDeclaredMethods": true
   },
   {
+    "name": "com.example.demonativeaop.HiService",
+    "allDeclaredMethods": true
+  },
+  {
+    "name": "com.example.demonativeaop.Greeter",
+    "allDeclaredMethods": true
+  },
+  {
     "name": "com.example.demonativeaop.MyAspect",
     "allDeclaredMethods": true
   }

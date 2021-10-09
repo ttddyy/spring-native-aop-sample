@@ -4,8 +4,12 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.nativex.hint.AotProxyHint;
+import org.springframework.nativex.hint.ProxyBits;
 
 @SpringBootApplication
+@AotProxyHint(targetClass=com.example.demonativeaop.HiService.class, proxyFeatures = ProxyBits.IS_STATIC)
+@AotProxyHint(targetClass=com.example.demonativeaop.GreetingService.class, proxyFeatures = ProxyBits.IS_STATIC)
 public class DemoNativeAopApplication {
 
     public static void main(String[] args) {
@@ -13,21 +17,27 @@ public class DemoNativeAopApplication {
     }
 
     @Bean
-    public HelloService helloService() {
+    public MyAspect myAspect() {
+        return new MyAspect();
+    }
+
+    @Bean
+    public HelloServiceImpl helloService() {
         return new HelloServiceImpl();
     }
 
     @Bean
-    public CommandLineRunner runner(HelloService helloService) {
-        return (args) -> {
-            String hello = helloService.hello();
-            System.out.println("Service: " + hello);
-        };
+    public HiService hiService() {
+        return new HiService();
     }
 
     @Bean
-    public MyAspect myAspect() {
-        return new MyAspect();
+    public CommandLineRunner runner(HelloService helloService, HiService hiService, GreetingService greetingService) {
+        return (args) -> {
+            System.out.println("HelloService: " + helloService.hello());
+            System.out.println("HiService: " + hiService.hi());
+            System.out.println("GreetingService: " + greetingService.greet());
+        };
     }
 
 }
